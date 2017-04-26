@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="E:/GitHub/GameFiveInOneRow_Client" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../5In1RowClient" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
 </project>
