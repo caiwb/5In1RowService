@@ -18,18 +18,18 @@ class ServiceDispather(object):
         try:
             data = json.loads(data)
         except:
-            logging.debug('msg format error')
+            logging.warning('msg format error')
         if not data.has_key('sid'):
-            logging.debug('data has not sid key')
+            logging.warning('data has not sid key')
             return -1
         sid = data['sid']
         if isinstance(sid, int):
             sid = str(sid)
         if sid not in self.__serviceMap.keys():
-            logging.debug('unregist sid ' + sid)
+            logging.warning('unregist sid ' + sid)
             return -1
         svc = self.__serviceMap[sid]
         try:
             return svc.handle(data, hid)
         except:
-            logging.debug('bad service ' + sid)
+            logging.warning('bad service ' + sid)

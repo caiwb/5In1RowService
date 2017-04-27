@@ -2,36 +2,39 @@
 
 import json
 import logging
-
+from user_object import UserObject
 from base_service import BaseService
 
 
 class UserService(BaseService):
-    def __init__(self, host, sid):
-        BaseService.__init__(self, host, sid)
+    def __init__(self, main, sid):
+        BaseService.__init__(self, main, sid)
         self.registCommand('0', self.loginHandler)
-        self.users = []
 
     # 登录 cid=0
     def loginHandler(self, data, hid):
         respData = {'sid': 0,
                     'cid': 0}
-        if not data.has_key('user'):
-            logging.debug('login data has not user key')
+        if not data.has_key('account'):
+            logging.debug('login data has not account key')
             return
-        user = data['user']
-        respData['user'] = user
-        if user in self.users:
+        account = data['account']
+
+        user = UserObject(account)
+
+        respData['user'] = user.__dict__
+
+        if self.main.findUserByUid(account):
             respData['result'] = 0
             respData['code'] = 1001
             respData['reason'] = 'this user is online'
-            respJson = json.dumps(respData)
-            self.host.send(hid, respJson)
         else:
             respData['result'] = 1
             respData['code'] = 0
             respData['reason'] = 'login success'
-            respJson = json.dumps(respData)
-            self.users.append((hid, user))
-            self.host.send(hid, respJson)
-        logging.debug('send' + respJson)
+            self.main.users.append(user)
+            self.main.userHid[user.account] = hid
+
+        respJson = json.dumps(respData)
+        self.main.host.send(hid, respJson)
+        logging.debug('send s=0 c=0 ' + respJson)

@@ -1,27 +1,36 @@
 # -*- encoding: UTF-8 -*-
 
 import logging
+import copy
 import time
-
 import netstream
 import service_dispatcher
 import user_service
-
+import room_service
 
 class MainService(object):
     def __init__(self):
-        self.host = netstream.nethost(8)
+        self.host = netstream.nethost()
         self.host.startup(7890, '127.0.0.1')
         self.shutdown = False
         self.dispatcher = service_dispatcher.ServiceDispather(self.host)
         self.__setupServices()
         self.clientLastMsgMap = {}
+
+        #data
+        self.users = []
+        self.rooms = []
+        self.userHid = {}
+
         self.__startLoop()
 
+
     def __setupServices(self):
-        self.userService = user_service.UserService(self.host, sid='0')
+        self.userService = user_service.UserService(self, sid='0')
+        self.roomService = room_service.RoomService(self, sid='1')
 
         self.dispatcher.registService('0', self.userService)
+        self.dispatcher.registService('1', self.roomService)
 
     def __startLoop(self):
         while not self.shutdown:
@@ -50,3 +59,13 @@ class MainService(object):
 
     def __handleData(self, data, hid):
         self.dispatcher.dispatch(data, hid)
+
+    def findUserByUid(self, uid):
+        try:
+            for idx, user in enumerate(self.users):
+                if uid == user.uid:
+                    return copy.deepcopy(user)
+            return None
+        except:
+            logging.warning('find user error')
+            return None

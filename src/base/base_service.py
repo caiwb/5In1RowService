@@ -3,8 +3,8 @@
 import logging, json
 
 class BaseService(object):
-    def __init__(self, host, sid=0):
-        self.host = host
+    def __init__(self, main, sid=0):
+        self.main = main
         self.sid = sid
         self.commandMap = {}
 
@@ -20,9 +20,9 @@ class BaseService(object):
         if isinstance(cid, int):
             cid = str(cid)
         if cid not in self.commandMap.keys():
-            logging.debug('unregist cid ' + cid)
+            logging.warning('unregist cid ' + cid)
         f = self.commandMap[cid]
         try:
             return f(data, hid)
         except:
-            logging.debug('bad command ' + cid)
+            logging.warning('bad command ' + self.sid + '_' + cid)

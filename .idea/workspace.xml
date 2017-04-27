@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e2db04-7384-46db-9d3d-112f8d2bb961" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/room/room_service.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/5In1RowService.iml" afterPath="$PROJECT_DIR$/.idea/5In1RowService.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/n5998.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/room/room_object.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/user/user_object.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/base_service.py" afterPath="$PROJECT_DIR$/src/base/base_service.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/host.py" afterPath="$PROJECT_DIR$/src/base/host.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/login_service.py" afterPath="$PROJECT_DIR$/src/user/user_service.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/service_dispatcher.py" afterPath="$PROJECT_DIR$/src/base/service_dispatcher.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/base/base_service.py" afterPath="$PROJECT_DIR$/src/base/base_service.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/base/host.py" afterPath="$PROJECT_DIR$/src/base/host.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/base/service_dispatcher.py" afterPath="$PROJECT_DIR$/src/base/service_dispatcher.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/room/room_service.py" afterPath="$PROJECT_DIR$/src/room/room_service.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/user/user_service.py" afterPath="$PROJECT_DIR$/src/user/user_service.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +21,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/5In1RowService$netstream.coverage" NAME="netstream Coverage Results" MODIFIED="1493270009906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" />
-    <SUITE FILE_PATH="coverage/5In1RowService$launcher.coverage" NAME="launcher Coverage Results" MODIFIED="1493279289063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/5In1RowService$launcher.coverage" NAME="launcher Coverage Results" MODIFIED="1493295636038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/5In1RowService$service.coverage" NAME="service Coverage Results" MODIFIED="1493085739284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/5In1RowService$service__1_.coverage" NAME="service (1) Coverage Results" MODIFIED="1493091180615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/5In1RowService$network_client.coverage" NAME="network_client Coverage Results" MODIFIED="1493091184190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../5In1RowClient/src" />
@@ -30,11 +32,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="host.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="host.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/base/host.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
-              <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
+            <state relative-caret-position="399">
+              <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
               <folding>
                 <element signature="e#27#41#0" expanded="true" />
               </folding>
@@ -45,18 +47,30 @@
       <file leaf-file-name="room_service.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/room/room_service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+            <state relative-caret-position="223">
+              <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <folding>
+                <element signature="e#26#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="local.py" pinned="false" current-in-tab="false">
+        <entry file="file://D:/Python27/Lib/site-packages/werkzeug/local.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5548">
+              <caret line="295" column="8" lean-forward="false" selection-start-line="295" selection-start-column="8" selection-end-line="295" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/Python27/Lib/json/__init__.py">
+      <file leaf-file-name="exceptions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/exceptions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2280">
-              <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
+            <state relative-caret-position="1368">
+              <caret line="72" column="4" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -65,11 +79,21 @@
       <file leaf-file-name="service_dispatcher.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/base/service_dispatcher.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            <state relative-caret-position="608">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="room_object.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/room/room_object.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +101,8 @@
       <file leaf-file-name="user_service.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/user/user_service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="323">
+              <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="36" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
@@ -86,41 +110,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="user_object.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/user/user_object.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="6" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="base_service.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/base/base_service.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state relative-caret-position="475">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__builtin__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/__builtin__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63878">
-              <caret line="3362" column="8" lean-forward="false" selection-start-line="3362" selection-start-column="8" selection-end-line="3362" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="launcher.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/launcher.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="netstream.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="netstream.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/netstream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9500">
-              <caret line="505" column="13" lean-forward="false" selection-start-line="505" selection-start-column="13" selection-end-line="505" selection-end-column="13" />
+            <state relative-caret-position="1648">
+              <caret line="631" column="0" lean-forward="false" selection-start-line="631" selection-start-column="0" selection-end-line="631" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -155,6 +169,8 @@
       <find>print</find>
       <find>self.queue.append((NET_DATA</find>
       <find>queue.append((NET_DATA</find>
+      <find>co</find>
+      <find>RoomObject</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -173,9 +189,13 @@
         <option value="$PROJECT_DIR$/src/login_service.py" />
         <option value="$PROJECT_DIR$/src/room_service.py" />
         <option value="$PROJECT_DIR$/src/user/login_service.py" />
-        <option value="$PROJECT_DIR$/src/user/user_service.py" />
-        <option value="$PROJECT_DIR$/src/room/room_service.py" />
         <option value="$PROJECT_DIR$/launcher.py" />
+        <option value="$PROJECT_DIR$/src/base/service_dispatcher.py" />
+        <option value="$PROJECT_DIR$/src/base/base_service.py" />
+        <option value="$PROJECT_DIR$/src/user/user_object.py" />
+        <option value="$PROJECT_DIR$/src/user/user_service.py" />
+        <option value="$PROJECT_DIR$/src/room/room_object.py" />
+        <option value="$PROJECT_DIR$/src/room/room_service.py" />
         <option value="$PROJECT_DIR$/src/base/host.py" />
       </list>
     </option>
@@ -192,7 +212,9 @@
     <option name="width" value="1936" />
     <option name="height" value="1066" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -208,7 +230,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -280,6 +301,10 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="room" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -315,6 +340,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -656,11 +682,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32845187" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32845187" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32845187" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -684,11 +710,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/lib/netstream.py</url>
-          <line>398</line>
-          <option name="timeStamp" value="16" />
+          <url>file://$PROJECT_DIR$/src/room/room_service.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -696,43 +725,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41914">
-          <caret line="2206" column="8" lean-forward="false" selection-start-line="2206" selection-start-column="8" selection-end-line="2206" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/launcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/netstream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11514">
-          <caret line="611" column="45" lean-forward="true" selection-start-line="611" selection-start-column="45" selection-end-line="611" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/_socket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10925">
-          <caret line="575" column="64" lean-forward="true" selection-start-line="575" selection-start-column="64" selection-end-line="575" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/base/host.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -747,7 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6821">
           <caret line="363" column="0" lean-forward="false" selection-start-line="363" selection-start-column="0" selection-end-line="363" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,7 +751,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6403">
           <caret line="338" column="0" lean-forward="false" selection-start-line="338" selection-start-column="0" selection-end-line="338" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -815,7 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10925">
           <caret line="575" column="64" lean-forward="true" selection-start-line="575" selection-start-column="64" selection-end-line="575" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -874,7 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10925">
           <caret line="575" column="64" lean-forward="true" selection-start-line="575" selection-start-column="64" selection-end-line="575" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -900,7 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7372">
           <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -926,7 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7372">
           <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -952,7 +943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7372">
           <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -978,7 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1004,7 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7372">
           <caret line="388" column="8" lean-forward="false" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,7 +1016,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10925">
           <caret line="575" column="64" lean-forward="true" selection-start-line="575" selection-start-column="64" selection-end-line="575" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,7 +1023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6821">
           <caret line="363" column="0" lean-forward="false" selection-start-line="363" selection-start-column="0" selection-end-line="363" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1044,70 +1030,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2280">
           <caret line="121" column="4" lean-forward="false" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/__builtin__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63878">
-          <caret line="3362" column="8" lean-forward="false" selection-start-line="3362" selection-start-column="8" selection-end-line="3362" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/netstream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9500">
-          <caret line="505" column="13" lean-forward="false" selection-start-line="505" selection-start-column="13" selection-end-line="505" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/base_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/service_dispatcher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="e#26#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/user/user_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding>
-            <element signature="e#26#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/room/room_service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="12" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/__init__.py" />
     <entry file="file://$PROJECT_DIR$/launcher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -1116,13 +1042,99 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15124">
+          <caret line="796" column="4" lean-forward="false" selection-start-line="796" selection-start-column="4" selection-end-line="796" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.3/system/python_stubs/1494736245/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="72" column="4" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Python27/Lib/site-packages/werkzeug/local.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5548">
+          <caret line="295" column="8" lean-forward="false" selection-start-line="295" selection-start-column="8" selection-end-line="295" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/user/user_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="36" />
+          <folding>
+            <element signature="e#26#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/base_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/service_dispatcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/room/room_object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/user/user_object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="6" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/base/host.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="36" column="44" lean-forward="true" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
+        <state relative-caret-position="399">
+          <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
           <folding>
             <element signature="e#27#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/room/room_service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/netstream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1648">
+          <caret line="631" column="0" lean-forward="false" selection-start-line="631" selection-start-column="0" selection-end-line="631" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
