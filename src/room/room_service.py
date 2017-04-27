@@ -18,8 +18,7 @@ class RoomService(BaseService):
                 room = copy.deepcopy(room)
                 roomDict = room.__dict__
                 userList = []
-                for uid in room.users:
-                    user = copy.deepcopy(self.main.findUserByUid(uid))
+                for user in room.users:
                     userList.append(user.__dict__)
                 roomDict['users'] = userList
                 list.append(roomDict)
@@ -31,7 +30,7 @@ class RoomService(BaseService):
     # 新建房间 cid=0
     def createRoomHandler(self, data, hid):
         if self.cout == 1:
-                    self.cout
+            self.cout
         respData = {'sid': 1,
                     'cid': 0}
         if not data.has_key('uid'):
@@ -39,8 +38,9 @@ class RoomService(BaseService):
             return
 
         uid = data['uid']
-        if uid:
-            room = RoomObject(len(self.main.rooms), uid)
+        user = self.main.findUserByUid(uid)
+        if user:
+            room = RoomObject(len(self.main.rooms), user)
             self.main.rooms.append(room)
             respData['result'] = 1
             respData['rooms'] = self.roomListData
