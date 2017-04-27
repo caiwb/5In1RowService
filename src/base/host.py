@@ -2,9 +2,10 @@
 
 import logging
 import time
-import login_service
+
 import netstream
 import service_dispatcher
+import user_service
 
 
 class MainService(object):
@@ -18,8 +19,9 @@ class MainService(object):
         self.__startLoop()
 
     def __setupServices(self):
-        self.loginService = login_service.LoginService(self.host, '0')
-        self.dispatcher.registService('0', self.loginService)
+        self.userService = user_service.UserService(self.host, sid='0')
+
+        self.dispatcher.registService('0', self.userService)
 
     def __startLoop(self):
         while not self.shutdown:

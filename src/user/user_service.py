@@ -1,10 +1,12 @@
 #-*- encoding: UTF-8 -*-
 
-from base_service import BaseService
 import json
 import logging
 
-class LoginService(BaseService):
+from base_service import BaseService
+
+
+class UserService(BaseService):
     def __init__(self, host, sid):
         BaseService.__init__(self, host, sid)
         self.registCommand('0', self.loginHandler)
@@ -30,6 +32,6 @@ class LoginService(BaseService):
             respData['code'] = 0
             respData['reason'] = 'login success'
             respJson = json.dumps(respData)
-            self.users.append(user)
+            self.users.append((hid, user))
             self.host.send(hid, respJson)
         logging.debug('send' + respJson)
