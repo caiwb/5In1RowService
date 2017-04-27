@@ -2,7 +2,6 @@
 
 import logging
 import time
-import json
 import login_service
 import netstream
 import service_dispatcher
@@ -23,20 +22,27 @@ class MainService(object):
     def __startLoop(self):
         while not self.shutdown:
             self.host.process()
-            logging.debug(self.host.queue)
-            msg = self.host.read()
-            if msg:
-                event = msg[0]
+            if len(self.host.queue) > 0:
+                logging.debug(self.host.queue)
+            event, hid, tag, data = self.host.read()
+            if event != -1:
+                print event
                 if event == netstream.NET_NEW:
-                    pass
+                    self.__handleNew(hid)
                 elif event == netstream.NET_LEAVE:
                     pass
                 elif event == netstream.NET_DATA:
-                    self.dispatcher.dispatch(json.loads(msg[3]), msg[1])
-
+                    self.__handleData(data, hid)
                 elif event == netstream.NET_TIMER:
                     pass
 
+    def __handleNew(self, wparam):
+        # self.host.settag(wparam, wparam)
+        self.host.nodelay(wparam, 1)
+
+    def __handleData(self, data, hid):
+        print data
+        self.dispatcher.dispatch(data, hid)
 
 
 

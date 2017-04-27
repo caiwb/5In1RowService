@@ -1,5 +1,8 @@
 #-*- encoding: UTF-8 -*-
 
+import json
+import logging
+
 class ServiceDispather(object):
     def __init__(self, host):
         self.service = host
@@ -10,17 +13,23 @@ class ServiceDispather(object):
             sid = str(sid)
         self.__serviceMap[sid] = svc
 
-    def dispatch(self, msg, owner):
-        if not msg.has_key('sid'):
-            return
-        sid = msg['sid']
+    def dispatch(self, data, hid):
+        logging.debug('recv' + data)
+        try:
+            data = json.loads(data)
+        except:
+            logging.debug('msg format error')
+        if not data.has_key('sid'):
+            logging.debug('data has not sid key')
+            return -1
+        sid = data['sid']
         if isinstance(sid, int):
             sid = str(sid)
         if sid not in self.__serviceMap.keys():
-            raise Exception('unregist sid ' + sid)
+            logging.debug('unregist sid ' + sid)
+            return -1
         svc = self.__serviceMap[sid]
-        # try:
-        #     return svc.handle(msg, owner)
-        # except:
-        #     raise Exception('bad service ' + sid)
-        return svc.handle(msg, owner)
+        try:
+            return svc.handle(data, hid)
+        except:
+            logging.debug('bad service ' + sid)
