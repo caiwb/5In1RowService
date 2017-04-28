@@ -11,7 +11,7 @@ class UserService(BaseService):
         self.registCommand('0', self.loginHandler)
 
     # 登录 cid=0
-    def loginHandler(self, data, hid):
+    def loginHandler(self, hid, data):
         respData = {'sid': 0,
                     'cid': 0}
         if not data.has_key('account'):

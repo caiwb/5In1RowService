@@ -49,15 +49,15 @@ class MainService(object):
                 elif event == netstream.NET_LEAVE:
                     pass
                 elif event == netstream.NET_DATA:
-                    self.__handleData(data, hid)
+                    self.__handleData(hid, data)
                 elif event == netstream.NET_TIMER:
                     pass
 
     def __handleNew(self, hid):
         self.host.nodelay(hid, 1)
 
-    def __handleData(self, data, hid):
-        self.dispatcher.dispatch(data, hid)
+    def __handleData(self, hid, data):
+        self.dispatcher.dispatch(hid, data)
 
     def findUserByUid(self, uid):
         try:

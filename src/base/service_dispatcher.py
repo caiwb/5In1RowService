@@ -13,7 +13,7 @@ class ServiceDispather(object):
             sid = str(sid)
         self.__serviceMap[sid] = svc
 
-    def dispatch(self, data, hid):
+    def dispatch(self, hid, data):
         logging.debug('recv' + data)
         try:
             data = json.loads(data)
@@ -30,6 +30,6 @@ class ServiceDispather(object):
             return -1
         svc = self.__serviceMap[sid]
         try:
-            return svc.handle(data, hid)
+            return svc.handle(hid, data)
         except:
             logging.warning('bad service ' + sid)

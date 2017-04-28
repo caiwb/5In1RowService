@@ -13,7 +13,7 @@ class BaseService(object):
             cid = str(cid)
         self.commandMap[cid] = function
 
-    def handle(self, data, hid):
+    def handle(self, hid, data):
         if not data.has_key('cid'):
             return
         cid = data['cid']
@@ -23,6 +23,6 @@ class BaseService(object):
             logging.warning('unregist cid ' + cid)
         f = self.commandMap[cid]
         try:
-            return f(data, hid)
+            return f(hid, data)
         except:
             logging.warning('bad command ' + self.sid + '_' + cid)

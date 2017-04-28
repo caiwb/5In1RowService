@@ -12,7 +12,7 @@ class RoomService(BaseService):
         self.registCommand('1', self.postListHandler)
 
     # 新建房间 cid=0
-    def createRoomHandler(self, data, hid):
+    def createRoomHandler(self, hid, data):
         respData = {'sid': 1,
                     'cid': 0}
         if not data.has_key('uid'):
@@ -38,7 +38,7 @@ class RoomService(BaseService):
             self.needsPostRoomList = True
 
     # 房间列表 cid=1
-    def postListHandler(self, data, hid):
+    def postListHandler(self, hid, data=''):
         try:
             respData = {'sid': 1,
                         'cid': 1,
@@ -58,7 +58,7 @@ class RoomService(BaseService):
 
     def postAllListHandler(self):
         for client in self.main.host.clients:
-            self.postListHandler('', client.hid)
+            self.postListHandler(client.hid)
 
 
     # 进入房间 cid=2
