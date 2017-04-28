@@ -5,7 +5,6 @@ import logging
 from user_object import UserObject
 from base_service import BaseService
 
-
 class UserService(BaseService):
     def __init__(self, main, sid):
         BaseService.__init__(self, main, sid)

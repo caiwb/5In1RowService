@@ -24,7 +24,6 @@ class MainService(object):
 
         self.__startLoop()
 
-
     def __setupServices(self):
         self.userService = user_service.UserService(self, sid='0')
         self.roomService = room_service.RoomService(self, sid='1')
