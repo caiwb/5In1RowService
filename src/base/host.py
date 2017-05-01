@@ -25,11 +25,11 @@ class MainService(object):
         self.__startLoop()
 
     def __setupServices(self):
-        self.userService = user_service.UserService(self, sid='0')
-        self.roomService = room_service.RoomService(self, sid='1')
+        self.userService = user_service.UserService(self, sid='1000')
+        self.roomService = room_service.RoomService(self, sid='1001')
 
-        self.dispatcher.registService('0', self.userService)
-        self.dispatcher.registService('1', self.roomService)
+        self.dispatcher.registService('1000', self.userService)
+        self.dispatcher.registService('1001', self.roomService)
 
     def __startLoop(self):
         while not self.shutdown:
@@ -38,7 +38,7 @@ class MainService(object):
                 logging.debug(self.host.queue)
             msg = self.host.read()
             event, hid, tag, data = msg
-            if self.clientLastMsgMap.has_key(str(hid)) \
+            if event != -1 and self.clientLastMsgMap.has_key(str(hid)) \
                     and msg == self.clientLastMsgMap[str(hid)][0] \
                     and time.time() - self.clientLastMsgMap[str(hid)][1] < 1:
                 continue

@@ -8,12 +8,12 @@ from base_service import BaseService
 class UserService(BaseService):
     def __init__(self, main, sid):
         BaseService.__init__(self, main, sid)
-        self.registCommand('0', self.loginHandler)
+        self.registCommand('1000', self.loginHandler)
 
     # 登录 cid=0
     def loginHandler(self, hid, data):
-        respData = {'sid': 0,
-                    'cid': 0}
+        respData = {'sid': 1000,
+                    'cid': 1000}
         if not data.has_key('account'):
             logging.debug('login data has not account key')
             return
@@ -36,4 +36,4 @@ class UserService(BaseService):
 
         respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)
-        logging.debug('send s=0 c=0 ' + respJson)
+        logging.debug('send s=1000 c=1000 ' + respJson)
