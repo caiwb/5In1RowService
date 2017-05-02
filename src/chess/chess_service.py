@@ -111,8 +111,112 @@ class ChessService(BaseService):
         respJson = json.dumps(respData)
         for h in hids:
             self.main.host.send(h, respJson)
+        rslt = self.isWin(x, y, type, str(rid))
+        if rslt:
+            logging.debug("win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 
     def start(self, rid):
         self.main.chessDataMap[rid] = []
         self.main.chessMap[rid] = [[0] * 15 for i in range(15)]
+
+    def isWin(self, x, y, type, rid):
+        chessboard = self.main.chessMap[rid]
+
+        # 竖直方向
+        i = x
+        j = y
+        count = 0
+        for loop in range(1, 6):
+            j -= loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+        j = y
+        for loop in range(1, 6):
+            j += loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+
+        # 水平方向
+        j = y
+        count = 0
+        for loop in range(1, 6):
+            i -= loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+        i = x
+        for loop in range(1, 6):
+            i += loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+
+        # 左下右上方向
+        i = x
+        count = 0
+        for loop in range(1, 6):
+            i -= loop
+            j += loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+        i = x
+        j = y
+        for loop in range(1, 6):
+            i += loop
+            j -= loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+
+        # 右下左上方向
+        i = x
+        j = y
+        count = 0
+        for loop in range(1, 6):
+            i -= loop
+            j -= loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+        i = x
+        j = y
+        for loop in range(1, 6):
+            i += loop
+            j += loop
+            t = chessboard[i][j]
+            if chessboard[i][j] != type:
+                break
+            count += 1
+        if count == 5:
+            return True
+
+        return False
+
+
+
 
