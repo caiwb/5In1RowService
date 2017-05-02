@@ -68,3 +68,13 @@ class MainService(object):
         except:
             logging.warning('find user error')
             return None
+
+    def findRoomByRid(self, rid):
+        try:
+            for idx, room in enumerate(self.rooms):
+                if rid == room.roomId:
+                    return copy.deepcopy(room)
+            return None
+        except:
+            logging.warning('find room error')
+            return None

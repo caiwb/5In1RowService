@@ -7,9 +7,9 @@ from room_object import RoomObject
 class RoomService(BaseService):
     def __init__(self, main, sid):
         BaseService.__init__(self, main, sid)
-        self.__needsPostRoomList = False
         self.registCommand('1000', self.createRoomHandler)
         self.registCommand('1001', self.postListHandler)
+        self.registCommand('1002', self.enterRoomHandler)
 
     # 新建房间 cid=0
     def createRoomHandler(self, hid, data):
@@ -22,20 +22,21 @@ class RoomService(BaseService):
         uid = data['uid']
         user = self.main.findUserByUid(uid)
         if user:
-            room = RoomObject(len(self.main.rooms), user)
+            room = RoomObject(len(self.main.rooms) + 1, user)
             self.main.rooms.append(room)
             respData['result'] = 1
-            respData['rid'] = room.roomId
+            roomCopy = copy.deepcopy(room)
+            respData['room'] = roomCopy.coverToDict()
             respData['code'] = 0
         else:
             respData['result'] = 0
-            respData['rid'] = -1
+            respData['room'] = None
             respData['code'] = 1100
         respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)
         logging.debug('send s=1001 c=1000 ' + respJson)
         if respData['result'] == 1:
-            self.needsPostRoomList = True
+            self.postAllListHandler()
 
     # 房间列表 cid=1
     def postListHandler(self, hid, data=''):
@@ -62,19 +63,39 @@ class RoomService(BaseService):
 
 
     # 进入房间 cid=2
+    def enterRoomHandler(self, hid, data):
+        respData = {'sid': 1001,
+                    'cid': 1002}
+        if not data.has_key('uid') or not data.has_key('rid'):
+            logging.warning('enter room data key err')
+            return
+
+        uid = data['uid']
+        rid = data['rid']
+        user = self.main.findUserByUid(uid)
+        room = self.addUserToRoom(user, rid)
+
+        if uid and room:
+            respData['result'] = 1
+            respData['code'] = 0
+            roomCopy = copy.deepcopy(room)
+            respData['room'] = roomCopy.coverToDict()
+            respJson = json.dumps(respData)
+            for user in room.users:
+                h = self.main.userHid[user.uid]
+                self.main.host.send(h, respJson)
+            self.postAllListHandler()
+
+        else:
+            respData['result'] = 0
+            respData['code'] = 1001
+            respData['room'] = None
+            respJson = json.dumps(respData)
+            self.main.host.send(hid, respJson)
+
+        logging.debug('send s=1001 c=1002 ' + respJson)
 
     # 退出房间 cid=3
-
-    @property
-    def needsPostRoomList(self):
-        return self.__needsPostRoomList
-
-    @needsPostRoomList.setter
-    def needsPostRoomList(self, value):
-        if value:
-            self.__needsPostRoomList = True
-            self.postAllListHandler()
-            self.__needsPostRoomList = False
 
     @property
     def roomListData(self):
@@ -91,3 +112,31 @@ class RoomService(BaseService):
         except Exception as e:
             logging.warning('roomlist return error - ' + e.message)
         return list
+
+    def addUserToRoom(self, user, rid):
+        try:
+            for idx, room in enumerate(self.main.rooms):
+                if rid == room.roomId:
+                    if len(room.users) < 2:
+                        room.users.append(user)
+                        return room
+                    else:
+                        return None
+            return None
+        except:
+            logging.warning('enter room error')
+            return None
+
+    def removeUserInRoom(self, u, rid):
+        try:
+            for idx, room in enumerate(self.main.rooms):
+                if rid == room.roomId:
+                    usersCopy = copy.deepcopy(room.users)
+                    for jdx, user in enumerate(usersCopy):
+                        if u.uid == user.uid:
+                            room.users.remove(user)
+                            return 1
+            return 0
+        except:
+            logging.warning('leave room error')
+            return 0
