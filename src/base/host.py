@@ -7,6 +7,7 @@ import netstream
 import service_dispatcher
 import user_service
 import room_service
+import chess_service
 
 class MainService(object):
     def __init__(self):
@@ -21,15 +22,20 @@ class MainService(object):
         self.users = []
         self.rooms = []
         self.userHid = {}
-
+        self.chessMap = {}
+        self.chessDataMap = {}
+        self.lastBlack = None
+        self.lastWhite = None
         self.__startLoop()
 
     def __setupServices(self):
         self.userService = user_service.UserService(self, sid='1000')
         self.roomService = room_service.RoomService(self, sid='1001')
+        self.chessService = chess_service.ChessService(self, sid='1002')
 
         self.dispatcher.registService('1000', self.userService)
         self.dispatcher.registService('1001', self.roomService)
+        self.dispatcher.registService('1002', self.chessService)
 
     def __startLoop(self):
         while not self.shutdown:
@@ -38,9 +44,11 @@ class MainService(object):
                 logging.debug(self.host.queue)
             msg = self.host.read()
             event, hid, tag, data = msg
+            t = time.time()
             if event != -1 and self.clientLastMsgMap.has_key(str(hid)) \
                     and msg == self.clientLastMsgMap[str(hid)][0] \
-                    and time.time() - self.clientLastMsgMap[str(hid)][1] < 1:
+                    and t - self.clientLastMsgMap[str(hid)][1] < 1:
+
                 continue
             self.clientLastMsgMap[str(hid)] = (msg, time.time())
             if event != -1:
