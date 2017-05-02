@@ -78,3 +78,14 @@ class MainService(object):
         except:
             logging.warning('find room error')
             return None
+
+    def deleteRoomByRid(self, rid):
+        try:
+            for idx, room in enumerate(self.rooms):
+                if rid == room.roomId:
+                    self.rooms.remove(room)
+                    return 1
+            return 0
+        except:
+            logging.warning('find room error')
+            return 0

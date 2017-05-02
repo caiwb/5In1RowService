@@ -10,6 +10,7 @@ class RoomService(BaseService):
         self.registCommand('1000', self.createRoomHandler)
         self.registCommand('1001', self.postListHandler)
         self.registCommand('1002', self.enterRoomHandler)
+        self.registCommand('1003', self.leaveRoomHandler)
 
     # 新建房间 cid=0
     def createRoomHandler(self, hid, data):
@@ -96,6 +97,50 @@ class RoomService(BaseService):
         logging.debug('send s=1001 c=1002 ' + respJson)
 
     # 退出房间 cid=3
+    def leaveRoomHandler(self, hid, data):
+        respData = {'sid': 1001,
+                    'cid': 1003}
+        if not data.has_key('uid') or not data.has_key('rid'):
+            logging.warning('leave room data key err')
+            return
+
+        uid = data['uid']
+        rid = data['rid']
+        respData['uid'] = uid
+        user = self.main.findUserByUid(uid)
+        room = self.main.findRoomByRid(rid)
+        hids = []
+        result = 1
+        try:
+            for user in room.users:
+                hids.append(self.main.userHid[uid])
+                if user.uid == uid:
+                    room.users.remove(user)
+            if not len(room.users):
+                self.main.deleteRoomByRid(rid)
+                room = None
+        except:
+            result = 0
+
+        if uid and result:
+            respData['result'] = 1
+            respData['code'] = 0
+
+        else:
+            respData['result'] = 0
+            respData['code'] = 1001
+
+        if room:
+            roomCopy = copy.deepcopy(room)
+            respData['room'] = roomCopy.coverToDict()
+        else:
+            respData['room'] = None
+
+        respJson = json.dumps(respData)
+        for h in hids:
+            self.main.host.send(h, respJson)
+        logging.debug('send s=1001 c=1002 ' + respJson)
+
 
     @property
     def roomListData(self):
@@ -127,16 +172,3 @@ class RoomService(BaseService):
             logging.warning('enter room error')
             return None
 
-    def removeUserInRoom(self, u, rid):
-        try:
-            for idx, room in enumerate(self.main.rooms):
-                if rid == room.roomId:
-                    usersCopy = copy.deepcopy(room.users)
-                    for jdx, user in enumerate(usersCopy):
-                        if u.uid == user.uid:
-                            room.users.remove(user)
-                            return 1
-            return 0
-        except:
-            logging.warning('leave room error')
-            return 0
