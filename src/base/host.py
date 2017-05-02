@@ -73,7 +73,7 @@ class MainService(object):
         try:
             for idx, room in enumerate(self.rooms):
                 if rid == room.roomId:
-                    return copy.deepcopy(room)
+                    return room
             return None
         except:
             logging.warning('find room error')

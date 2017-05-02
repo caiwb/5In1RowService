@@ -140,7 +140,7 @@ class RoomService(BaseService):
         for h in hids:
             self.main.host.send(h, respJson)
         logging.debug('send s=1001 c=1002 ' + respJson)
-
+        self.postAllListHandler()
 
     @property
     def roomListData(self):
