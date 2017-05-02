@@ -63,9 +63,11 @@ class ChessService(BaseService):
             if confirmType == CONFIRM_START:
                 self.start(str(room['rid']))
             elif confirmType == CONFIRM_REDO:
-                self.redo()
+                self.redo(str(room['rid']), respData['type'])
+                respData['xs'] = self.redoXs
+                respData['ys'] = self.redoYs
             elif confirmType == CONFIRM_GIVE_UP:
-                self.redo()
+                self.giveup(str(room['rid']), respData['type'])
             elif confirmType == CONFIRM_NO:
                 pass
 
@@ -74,8 +76,6 @@ class ChessService(BaseService):
                 respData['chess'] = index + 1
                 respJson = json.dumps(respData)
                 self.main.host.send(h, respJson)
-
-
 
     # 下棋 cid=1
     def chessHandler(self, hid, data):
@@ -113,33 +113,56 @@ class ChessService(BaseService):
             self.main.host.send(h, respJson)
         rslt = self.isWin(x, y, type, str(rid))
         if rslt:
-            logging.debug("win!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            self.postResult(rid, type)
 
+    # 输赢 cid=2
+    def postResult(self, rid, type):
+        respData = {'sid': 1002,
+                    'cid': 1002,
+                    'type': type}
+        hids = []
+        room = self.main.findRoomByRid(rid)
+        respJson = json.dumps(respData)
+        for user in room['users']:
+            self.main.host.send(self.main.userHid[user['uid']], respJson)
 
     def start(self, rid):
         self.main.chessDataMap[rid] = []
         self.main.chessMap[rid] = [[0] * 15 for i in range(15)]
 
+    def redo(self, rid, type):
+        self.redoXs = []
+        self.redoYs = []
+        x, y, t = self.main.chessDataMap[rid].pop()
+        self.main.chessMap[rid][x][y] = NONE_CHESS
+        self.redoXs.append(x)
+        self.redoYs.append(y)
+        if t == type:
+            return
+        x, y, t = self.main.chessDataMap[rid].pop()
+        self.main.chessMap[rid][x][y] = NONE_CHESS
+        self.redoXs.append(x)
+        self.redoYs.append(y)
+
+    def giveup(self, rid, type):
+        t = BLACK_CHESS if type == WHITE_CHESS else WHITE_CHESS
+        self.postResult(rid, t)
+
     def isWin(self, x, y, type, rid):
         chessboard = self.main.chessMap[rid]
-
         # 竖直方向
         i = x
         j = y
-        count = 0
+        count = 1
         for loop in range(1, 6):
-            j -= loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i][j - loop] != type:
                 break
             count += 1
-        if count == 5:
+        if count == 10:
             return True
         j = y
         for loop in range(1, 6):
-            j += loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i][j + loop] != type:
                 break
             count += 1
         if count == 5:
@@ -147,20 +170,16 @@ class ChessService(BaseService):
 
         # 水平方向
         j = y
-        count = 0
+        count = 1
         for loop in range(1, 6):
-            i -= loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i - loop][j] != type:
                 break
             count += 1
         if count == 5:
             return True
         i = x
         for loop in range(1, 6):
-            i += loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i + loop][j] != type:
                 break
             count += 1
         if count == 5:
@@ -168,12 +187,9 @@ class ChessService(BaseService):
 
         # 左下右上方向
         i = x
-        count = 0
+        count = 1
         for loop in range(1, 6):
-            i -= loop
-            j += loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i - loop][j + loop] != type:
                 break
             count += 1
         if count == 5:
@@ -181,10 +197,7 @@ class ChessService(BaseService):
         i = x
         j = y
         for loop in range(1, 6):
-            i += loop
-            j -= loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i + loop][j - loop] != type:
                 break
             count += 1
         if count == 5:
@@ -193,12 +206,9 @@ class ChessService(BaseService):
         # 右下左上方向
         i = x
         j = y
-        count = 0
+        count = 1
         for loop in range(1, 6):
-            i -= loop
-            j -= loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i - loop][j - loop] != type:
                 break
             count += 1
         if count == 5:
@@ -206,10 +216,7 @@ class ChessService(BaseService):
         i = x
         j = y
         for loop in range(1, 6):
-            i += loop
-            j += loop
-            t = chessboard[i][j]
-            if chessboard[i][j] != type:
+            if chessboard[i + loop][j + loop] != type:
                 break
             count += 1
         if count == 5:

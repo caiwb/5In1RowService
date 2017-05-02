@@ -27,6 +27,8 @@ class MainService(object):
         self.lastBlack = None
         self.lastWhite = None
         self.__startLoop()
+        self.hbMap = {}
+        self.hbTime = 30
 
     def __setupServices(self):
         self.userService = user_service.UserService(self, sid='1000')
@@ -54,10 +56,16 @@ class MainService(object):
             if event != -1:
                 if event == netstream.NET_NEW:
                     self.__handleNew(hid)
+
                 elif event == netstream.NET_LEAVE:
-                    pass
+                    for idx, user in enumerate(self.userHid.keys()):
+                        if hid == self.userHid[user]:
+                            self.userHid.pop(user)
+                            continue
+
                 elif event == netstream.NET_DATA:
                     self.__handleData(hid, data)
+
                 elif event == netstream.NET_TIMER:
                     pass
 
