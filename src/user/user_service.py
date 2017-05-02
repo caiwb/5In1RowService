@@ -2,7 +2,6 @@
 
 import json
 import logging
-from user_object import UserObject
 from base_service import BaseService
 
 class UserService(BaseService):
@@ -19,11 +18,16 @@ class UserService(BaseService):
             return
         account = data['account']
 
-        user = UserObject(account)
+        user = {
+            'uid': account,
+            'account': account,
+            'password': '',
+            'score': 0
+            }
 
-        respData['user'] = user.__dict__
+        respData['user'] = user
 
-        if self.main.findUserByUid(account):
+        if user in self.main.users:
             respData['result'] = 0
             respData['code'] = 1001
             respData['reason'] = 'this user is online'
@@ -32,7 +36,7 @@ class UserService(BaseService):
             respData['code'] = 0
             respData['reason'] = 'login success'
             self.main.users.append(user)
-            self.main.userHid[user.account] = hid
+            self.main.userHid[user['uid']] = hid
 
         respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)

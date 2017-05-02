@@ -23,11 +23,14 @@ class RoomService(BaseService):
         uid = data['uid']
         user = self.main.findUserByUid(uid)
         if user:
-            room = RoomObject(len(self.main.rooms) + 1, user)
+            # room = RoomObject(len(self.main.rooms) + 1, user)
+            room = {
+                'rid': len(self.main.rooms) + 1,
+                'users': [user]
+            }
             self.main.rooms.append(room)
             respData['result'] = 1
-            roomCopy = copy.deepcopy(room)
-            respData['room'] = roomCopy.coverToDict()
+            respData['room'] = room
             respData['code'] = 0
         else:
             respData['result'] = 0
@@ -46,7 +49,7 @@ class RoomService(BaseService):
                         'cid': 1001,
                         'result': 1,
                         'code': 0,
-                        'rooms': self.roomListData}
+                        'rooms': self.main.rooms}
             respJson = json.dumps(respData)
         except:
             respData = {'sid': 1001,
@@ -74,16 +77,17 @@ class RoomService(BaseService):
         uid = data['uid']
         rid = data['rid']
         user = self.main.findUserByUid(uid)
-        room = self.addUserToRoom(user, rid)
+        room = self.main.findRoomByRid(rid)
+        users = room['users']
+        users.append(user)
 
-        if uid and room:
+        if user and room:
             respData['result'] = 1
             respData['code'] = 0
-            roomCopy = copy.deepcopy(room)
-            respData['room'] = roomCopy.coverToDict()
+            respData['room'] = room
             respJson = json.dumps(respData)
-            for user in room.users:
-                h = self.main.userHid[user.uid]
+            for user in room['users']:
+                h = self.main.userHid[user['uid']]
                 self.main.host.send(h, respJson)
             self.postAllListHandler()
 
@@ -112,12 +116,12 @@ class RoomService(BaseService):
         hids = []
         result = 1
         try:
-            for user in room.users:
+            for user in room['users']:
                 hids.append(self.main.userHid[uid])
-                if user.uid == uid:
-                    room.users.remove(user)
-            if not len(room.users):
-                self.main.deleteRoomByRid(rid)
+                if user['uid'] == uid:
+                    room['users'].remove(user)
+            if not len(room['users']):
+                self.main.rooms.remove(room)
                 room = None
         except:
             result = 0
@@ -130,45 +134,11 @@ class RoomService(BaseService):
             respData['result'] = 0
             respData['code'] = 1001
 
-        if room:
-            roomCopy = copy.deepcopy(room)
-            respData['room'] = roomCopy.coverToDict()
-        else:
-            respData['room'] = None
+        respData['room'] = room
 
         respJson = json.dumps(respData)
         for h in hids:
             self.main.host.send(h, respJson)
-        logging.debug('send s=1001 c=1002 ' + respJson)
+        logging.debug('send s=1001 c=1003 ' + respJson)
         self.postAllListHandler()
-
-    @property
-    def roomListData(self):
-        list = []
-        try:
-            for idx, room in enumerate(self.main.rooms):
-                room = copy.deepcopy(room)
-                roomDict = room.__dict__
-                userList = []
-                for user in room.users:
-                    userList.append(user.__dict__)
-                roomDict['users'] = userList
-                list.append(roomDict)
-        except Exception as e:
-            logging.warning('roomlist return error - ' + e.message)
-        return list
-
-    def addUserToRoom(self, user, rid):
-        try:
-            for idx, room in enumerate(self.main.rooms):
-                if rid == room.roomId:
-                    if len(room.users) < 2:
-                        room.users.append(user)
-                        return room
-                    else:
-                        return None
-            return None
-        except:
-            logging.warning('enter room error')
-            return None
 

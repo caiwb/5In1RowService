@@ -62,8 +62,8 @@ class MainService(object):
     def findUserByUid(self, uid):
         try:
             for idx, user in enumerate(self.users):
-                if uid == user.uid:
-                    return copy.deepcopy(user)
+                if uid == user['uid']:
+                    return user
             return None
         except:
             logging.warning('find user error')
@@ -72,20 +72,9 @@ class MainService(object):
     def findRoomByRid(self, rid):
         try:
             for idx, room in enumerate(self.rooms):
-                if rid == room.roomId:
+                if rid == room['rid']:
                     return room
             return None
         except:
             logging.warning('find room error')
             return None
-
-    def deleteRoomByRid(self, rid):
-        try:
-            for idx, room in enumerate(self.rooms):
-                if rid == room.roomId:
-                    self.rooms.remove(room)
-                    return 1
-            return 0
-        except:
-            logging.warning('find room error')
-            return 0
