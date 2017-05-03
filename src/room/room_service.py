@@ -28,6 +28,7 @@ class RoomService(BaseService):
                 'rid': len(self.main.rooms) + 1,
                 'users': [user]
             }
+            user['rid'] = room['rid']
             self.main.rooms.append(room)
             respData['result'] = 1
             respData['room'] = room
@@ -77,6 +78,7 @@ class RoomService(BaseService):
         uid = data['uid']
         rid = data['rid']
         user = self.main.findUserByUid(uid)
+        user['rid'] = rid
         room = self.main.findRoomByRid(rid)
         users = room['users']
         users.append(user)
@@ -113,6 +115,7 @@ class RoomService(BaseService):
         respData['uid'] = uid
         user = self.main.findUserByUid(uid)
         room = self.main.findRoomByRid(rid)
+        user['rid'] = None
         hids = []
         result = 1
         try:

@@ -66,8 +66,9 @@ class ChessService(BaseService):
                 redoStep = self.redo(str(room['rid']), data['chess_type'])
                 respData['step'] = redoStep
                 respData['chess_type'] = data['chess_type']
-            elif confirmType == CONFIRM_GIVE_UP:
-                self.giveup(str(room['rid']), respData['type'])
+            elif confirmType == CONFIRM_GIVE_UP and data.has_key('chess_type'):
+                self.giveup(str(room['rid']), data['chess_type'])
+                return
             elif confirmType == CONFIRM_NO:
                 pass
 
@@ -140,8 +141,7 @@ class ChessService(BaseService):
         return 2
 
     def giveup(self, rid, type):
-        t = BLACK_CHESS if type == WHITE_CHESS else WHITE_CHESS
-        self.postResult(rid, t)
+        self.postResult(rid, type)
 
     def isWin(self, x, y, type, rid):
         chessboard = self.main.chessMap[rid]

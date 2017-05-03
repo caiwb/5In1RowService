@@ -58,9 +58,14 @@ class MainService(object):
                     self.__handleNew(hid)
 
                 elif event == netstream.NET_LEAVE:
-                    for idx, user in enumerate(self.userHid.keys()):
-                        if hid == self.userHid[user]:
-                            self.userHid.pop(user)
+                    for idx, uid in enumerate(self.userHid.keys()):
+                        if hid == self.userHid[uid]:
+                            user = self.findUserByUid(uid)
+                            self.host.queue.append((netstream.NET_DATA, hid, 0,
+                                                    '{"rid": %d, "cid": 1003, '
+                                                    '"uid": %s, "sid": 1001}'
+                                                    % (user['rid'], user.uid)))
+                            self.userHid.pop(uid)
                             continue
 
                 elif event == netstream.NET_DATA:
