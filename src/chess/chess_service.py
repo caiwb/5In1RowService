@@ -119,6 +119,7 @@ class ChessService(BaseService):
         rslt = self.isWin(x, y, type, str(rid))
         if rslt:
             self.postResult(rid, type)
+            self.main.postAllRank()
 
     # 输赢 cid=2
     def postResult(self, rid, type):

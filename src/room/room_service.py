@@ -11,6 +11,7 @@ class RoomService(BaseService):
         self.registCommand('1001', self.postListHandler)
         self.registCommand('1002', self.enterRoomHandler)
         self.registCommand('1003', self.leaveRoomHandler)
+        self.registCommand('1004', self.chatHandler)
 
     # 新建房间 cid=0
     def createRoomHandler(self, hid, data):
@@ -45,20 +46,13 @@ class RoomService(BaseService):
 
     # 房间列表 cid=1
     def postListHandler(self, hid, data=''):
-        try:
-            respData = {'sid': 1001,
-                        'cid': 1001,
-                        'result': 1,
-                        'code': 0,
-                        'rooms': self.main.rooms}
-            respJson = json.dumps(respData)
-        except:
-            respData = {'sid': 1001,
-                        'cid': 1001,
-                        'result': 0,
-                        'code': 1101,
-                        'rooms': []}
-            respJson = json.dumps(respData)
+        respData = {'sid': 1001,
+                    'cid': 1001,
+                    'result': 1,
+                    'code': 0,
+                    'rooms': self.main.rooms}
+        respJson = json.dumps(respData)
+        respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)
         logging.debug('send s=1001 c=1001 ' + respJson)
 
@@ -148,3 +142,17 @@ class RoomService(BaseService):
         logging.debug('send s=1001 c=1003 ' + respJson)
         self.postAllListHandler()
 
+    # 聊天 cid=4
+    def chatHandler(self, hid, data):
+        respData = {'sid': 1001,
+                    'cid': 1004}
+        if not data.has_key('uid') or not data.has_key('rid') \
+                or not data.has_key('text'):
+            logging.warning('chat data key err')
+        respData.update(data)
+        respJson = json.dumps(respData)
+        room = self.main.findRoomByRid(data['rid'])
+        for user in room['users']:
+            if self.main.userHid.has_key(user['uid']):
+                self.main.host.send(self.main.userHid[user['uid']], respJson)
+        logging.debug('send s=1001 c=1004 ' + respJson)

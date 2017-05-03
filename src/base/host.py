@@ -78,6 +78,11 @@ class MainService(object):
                         if client:
                             self.host.send(client.hid, 'hb')
 
+    def postAllRank(self):
+        for client in self.host.clients:
+            if client:
+                self.userService.postRankHandler(client.hid)
+
     def __handleNew(self, hid):
         self.host.nodelay(hid, 1)
 
