@@ -67,7 +67,7 @@ class ChessService(BaseService):
                 respData['step'] = redoStep
                 respData['chess_type'] = data['chess_type']
             elif confirmType == CONFIRM_GIVE_UP and data.has_key('chess_type'):
-                self.giveup(str(room['rid']), data['chess_type'])
+                self.giveup(str(room['rid']), 3 - data['chess_type'])
                 return
             elif confirmType == CONFIRM_NO:
                 pass
@@ -122,7 +122,7 @@ class ChessService(BaseService):
                     'cid': 1002,
                     'type': type}
         hids = []
-        room = self.main.findRoomByRid(rid)
+        room = self.main.findRoomByRid(int(rid))
         respJson = json.dumps(respData)
         for user in room['users']:
             self.main.host.send(self.main.userHid[user['uid']], respJson)
