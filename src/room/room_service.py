@@ -64,7 +64,8 @@ class RoomService(BaseService):
 
     def postAllListHandler(self):
         for client in self.main.host.clients:
-            self.postListHandler(client.hid)
+            if client:
+                self.postListHandler(client.hid)
 
 
     # 进入房间 cid=2
@@ -110,7 +111,7 @@ class RoomService(BaseService):
             logging.warning('leave room data key err')
             return
 
-        uid = data['uid']
+        uid = str(data['uid'])
         rid = data['rid']
         respData['uid'] = uid
         user = self.main.findUserByUid(uid)
@@ -120,13 +121,15 @@ class RoomService(BaseService):
         result = 1
         try:
             for user in room['users']:
-                hids.append(self.main.userHid[uid])
+                if self.main.userHid.has_key(user['uid']):
+                    hids.append(self.main.userHid[user['uid']])
                 if user['uid'] == uid:
                     room['users'].remove(user)
             if not len(room['users']):
                 self.main.rooms.remove(room)
                 room = None
-        except:
+        except Exception as e:
+            logging.warning(e.message)
             result = 0
 
         if uid and result:

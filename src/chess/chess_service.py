@@ -37,7 +37,9 @@ class ChessService(BaseService):
         room = self.main.findRoomByRid(data['rid'])
         uid = data['uid']
         rival = None
+        users = []
         for user in room['users']:
+            users.append(user)
             if user['uid'] != uid:
                 rival = user['uid']
 
@@ -75,6 +77,8 @@ class ChessService(BaseService):
             respData['result'] = 1
             for index, h in enumerate(hids):
                 respData['chess'] = index + 1
+                if index < len(users):
+                    users[index]['chess_type'] = index + 1
                 respJson = json.dumps(respData)
                 self.main.host.send(h, respJson)
 
@@ -123,6 +127,10 @@ class ChessService(BaseService):
                     'type': type}
         hids = []
         room = self.main.findRoomByRid(int(rid))
+        for user in room['users']:
+            user['score'] = user['score'] - 30 \
+                if type == user['chess_type'] else user['score'] + 30
+        respData['room'] = room
         respJson = json.dumps(respData)
         for user in room['users']:
             self.main.host.send(self.main.userHid[user['uid']], respJson)
