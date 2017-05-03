@@ -27,7 +27,7 @@ class UserService(BaseService):
 
         respData['user'] = user
 
-        if user in self.main.userHid.keys():
+        if account in self.main.userHid.keys():
             respData['result'] = 0
             respData['code'] = 1001
             respData['reason'] = 'this user is online'
