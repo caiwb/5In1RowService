@@ -11,8 +11,9 @@ import chess_service
 
 class MainService(object):
     def __init__(self):
-        self.host = netstream.nethost()
+        self.host = netstream.nethost(8)
         self.host.startup(7890, '127.0.0.1')
+        self.host.settimer(20000)
         self.shutdown = False
         self.dispatcher = service_dispatcher.ServiceDispather(self.host)
         self.__setupServices()
@@ -73,7 +74,9 @@ class MainService(object):
                     self.__handleData(hid, data)
 
                 elif event == netstream.NET_TIMER:
-                    pass
+                    for client in self.host.clients:
+                        if client:
+                            self.host.send(client.hid, 'hb')
 
     def __handleNew(self, hid):
         self.host.nodelay(hid, 1)
