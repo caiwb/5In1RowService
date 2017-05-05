@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/5In1RowService.iml" filepath="$PROJECT_DIR$/.idea/5In1RowService.iml" />
-      <module fileurl="file://E:/GitHub/GameFiveInOneRow_Client/GameFiveInOneRow_Client/.idea/GameFiveInOneRow_Client.iml" filepath="E:/GitHub/GameFiveInOneRow_Client/GameFiveInOneRow_Client/.idea/GameFiveInOneRow_Client.iml" />
     </modules>
   </component>
 </project>

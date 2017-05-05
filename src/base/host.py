@@ -1,13 +1,11 @@
 # -*- encoding: UTF-8 -*-
 
 import logging
-import copy
 import time
 import netstream
 import service_dispatcher
-import user_service
-import room_service
-import chess_service
+import user_service, room_service, chess_service
+import database
 
 class MainService(object):
     def __init__(self):
@@ -16,6 +14,7 @@ class MainService(object):
         self.host.settimer(20000)
         self.shutdown = False
         self.dispatcher = service_dispatcher.ServiceDispather(self.host)
+        self.db = database.DataManager()
         self.__setupServices()
         self.clientLastMsgMap = {}
 
@@ -32,9 +31,9 @@ class MainService(object):
         self.hbTime = 30
 
     def __setupServices(self):
-        self.userService = user_service.UserService(self, sid='1000')
-        self.roomService = room_service.RoomService(self, sid='1001')
-        self.chessService = chess_service.ChessService(self, sid='1002')
+        self.userService = user_service.UserService(self, '1000', self.db)
+        self.roomService = room_service.RoomService(self, '1001', self.db)
+        self.chessService = chess_service.ChessService(self, '1002', self.db)
 
         self.dispatcher.registService('1000', self.userService)
         self.dispatcher.registService('1001', self.roomService)

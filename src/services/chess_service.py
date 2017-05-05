@@ -20,8 +20,8 @@ WHITE_CHESS = 1
 BLACK_CHESS = 2
 
 class ChessService(BaseService):
-    def __init__(self, main, sid):
-        BaseService.__init__(self, main, sid)
+    def __init__(self, main, sid, db):
+        BaseService.__init__(self, main, sid, db)
         self.registCommand('1000', self.confirmHandler)
         self.registCommand('1001', self.chessHandler)
 

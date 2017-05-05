@@ -1,12 +1,13 @@
 # -*- encoding: UTF-8 -*-
 
-import logging, json
+import logging
 
 class BaseService(object):
-    def __init__(self, main, sid=0):
+    def __init__(self, main, sid=0, db=None):
         self.main = main
         self.sid = sid
         self.commandMap = {}
+        self.db = db
 
     def registCommand(self, cid, function):
         if isinstance(cid, int):

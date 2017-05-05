@@ -5,8 +5,8 @@ import logging
 from base_service import BaseService
 
 class UserService(BaseService):
-    def __init__(self, main, sid):
-        BaseService.__init__(self, main, sid)
+    def __init__(self, main, sid, db):
+        BaseService.__init__(self, main, sid, db)
         self.registCommand('1000', self.loginHandler)
         self.registCommand('1001', self.postRankHandler)
 

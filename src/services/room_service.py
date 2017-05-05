@@ -1,12 +1,11 @@
 #-*- encoding: UTF-8 -*-
 
 from base_service import BaseService
-import logging, json, copy
-from room_object import RoomObject
+import logging, json
 
 class RoomService(BaseService):
-    def __init__(self, main, sid):
-        BaseService.__init__(self, main, sid)
+    def __init__(self, main, sid, db):
+        BaseService.__init__(self, main, sid, db)
         self.registCommand('1000', self.createRoomHandler)
         self.registCommand('1001', self.postListHandler)
         self.registCommand('1002', self.enterRoomHandler)
