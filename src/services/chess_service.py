@@ -18,16 +18,20 @@ NONE_CHESS  = 0
 WHITE_CHESS = 1
 BLACK_CHESS = 2
 
+#cid
+CHESS_CONFIRM_HANDLER_ID = 1000
+DO_CHESS_HANDLER_ID      = 1001
+
 class ChessService(BaseService):
     def __init__(self, main, sid, db=None):
         BaseService.__init__(self, main, sid, db)
-        self.registCommand('1000', self.confirmHandler)
-        self.registCommand('1001', self.chessHandler)
+        self.registCommand(CHESS_CONFIRM_HANDLER_ID, self.confirmHandler)
+        self.registCommand(DO_CHESS_HANDLER_ID, self.chessHandler)
 
     # 确认 cid=0
     def confirmHandler(self, hid, data):
-        respData = {'sid': 1002,
-                    'cid': 1000}
+        respData = {'sid': self.sid,
+                    'cid': CHESS_CONFIRM_HANDLER_ID}
         if 'rid' not in data or 'uid' not in data \
                 or 'type' not in data \
                 or 'side' not in data:
@@ -83,8 +87,8 @@ class ChessService(BaseService):
 
     # 下棋 cid=1
     def chessHandler(self, hid, data):
-        respData = {'sid': 1002,
-                    'cid': 1001}
+        respData = {'sid': self.sid,
+                    'cid': DO_CHESS_HANDLER_ID}
         if 'x' not in data and 'y' not in data and \
                 'type' not in data:
             logging.debug('chess data has error key')

@@ -6,6 +6,11 @@ from lib import netstream
 import service_dispatcher
 from src.services import user_service, room_service, chess_service
 
+#sid
+USER_SERVICE_ID  = 1000
+ROOM_SERVICE_ID  = 1001
+CHESS_SERVICE_ID = 1002
+
 class MainService(object):
     def __init__(self):
         self.host = netstream.nethost(8)
@@ -29,13 +34,13 @@ class MainService(object):
         self.hbTime = 30
 
     def __setupServices(self):
-        self.userService = user_service.UserService(self, '1000')
-        self.roomService = room_service.RoomService(self, '1001')
-        self.chessService = chess_service.ChessService(self, '1002')
+        self.userService = user_service.UserService(self, USER_SERVICE_ID)
+        self.roomService = room_service.RoomService(self, ROOM_SERVICE_ID)
+        self.chessService = chess_service.ChessService(self, CHESS_SERVICE_ID)
 
-        self.dispatcher.registService('1000', self.userService)
-        self.dispatcher.registService('1001', self.roomService)
-        self.dispatcher.registService('1002', self.chessService)
+        self.dispatcher.registService(USER_SERVICE_ID, self.userService)
+        self.dispatcher.registService(ROOM_SERVICE_ID, self.roomService)
+        self.dispatcher.registService(CHESS_SERVICE_ID, self.chessService)
 
     def __startLoop(self):
         while not self.shutdown:

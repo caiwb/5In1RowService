@@ -3,19 +3,26 @@
 from src.base.base_service import BaseService
 import logging, json
 
+#cid
+CREATE_ROOM_HANDLER_ID  = 1000
+POST_LIST_HANDLER_ID    = 1001
+ENTER_ROOM_HANDLER_ID   = 1002
+LEAVE_ROOM_HANDLER_ID   = 1003
+CHAT_IN_ROOM_HANDLER_ID = 1004
+
 class RoomService(BaseService):
     def __init__(self, main, sid, db=None):
         BaseService.__init__(self, main, sid, db)
-        self.registCommand('1000', self.createRoomHandler)
-        self.registCommand('1001', self.postListHandler)
-        self.registCommand('1002', self.enterRoomHandler)
-        self.registCommand('1003', self.leaveRoomHandler)
-        self.registCommand('1004', self.chatHandler)
+        self.registCommand(CREATE_ROOM_HANDLER_ID, self.createRoomHandler)
+        self.registCommand(POST_LIST_HANDLER_ID, self.postListHandler)
+        self.registCommand(ENTER_ROOM_HANDLER_ID, self.enterRoomHandler)
+        self.registCommand(LEAVE_ROOM_HANDLER_ID, self.leaveRoomHandler)
+        self.registCommand(CHAT_IN_ROOM_HANDLER_ID, self.chatInRoomHandler)
 
     # 新建房间 cid=0
     def createRoomHandler(self, hid, data):
-        respData = {'sid': 1001,
-                    'cid': 1000}
+        respData = {'sid': self.sid,
+                    'cid': CREATE_ROOM_HANDLER_ID}
         if 'uid' not in data:
             logging.warning('create room data has not uid key')
             return
@@ -23,7 +30,6 @@ class RoomService(BaseService):
         uid = data['uid']
         user = self.main.findUserByUid(uid)
         if user:
-            # room = RoomObject(len(self.main.rooms) + 1, user)
             room = {
                 'rid': len(self.main.rooms) + 1,
                 'users': [user]
@@ -45,12 +51,11 @@ class RoomService(BaseService):
 
     # 房间列表 cid=1
     def postListHandler(self, hid, data=''):
-        respData = {'sid': 1001,
-                    'cid': 1001,
+        respData = {'sid': self.sid,
+                    'cid': POST_LIST_HANDLER_ID,
                     'result': 1,
                     'code': 0,
                     'rooms': self.main.rooms}
-        respJson = json.dumps(respData)
         respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)
         logging.debug('send s=1001 c=1001 ' + respJson)
@@ -63,8 +68,8 @@ class RoomService(BaseService):
 
     # 进入房间 cid=2
     def enterRoomHandler(self, hid, data):
-        respData = {'sid': 1001,
-                    'cid': 1002}
+        respData = {'sid': self.sid,
+                    'cid': ENTER_ROOM_HANDLER_ID}
         if 'uid' not in data or 'rid' not in data:
             logging.warning('enter room data key err')
             return
@@ -98,8 +103,8 @@ class RoomService(BaseService):
 
     # 退出房间 cid=3
     def leaveRoomHandler(self, hid, data):
-        respData = {'sid': 1001,
-                    'cid': 1003}
+        respData = {'sid': self.sid,
+                    'cid': LEAVE_ROOM_HANDLER_ID}
         if 'uid' not in data or 'rid' not in data:
             logging.warning('leave room data key err')
             return
@@ -142,9 +147,9 @@ class RoomService(BaseService):
         self.postAllListHandler()
 
     # 聊天 cid=4
-    def chatHandler(self, hid, data):
-        respData = {'sid': 1001,
-                    'cid': 1004}
+    def chatInRoomHandler(self, hid, data):
+        respData = {'sid': self.sid,
+                    'cid': CHAT_IN_ROOM_HANDLER_ID}
         if 'uid' not in data or 'rid' not in data \
                 or 'text' not in data:
             logging.warning('chat data key err')

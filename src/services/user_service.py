@@ -4,16 +4,20 @@ import json
 import logging
 from src.base.base_service import BaseService
 
+#cid
+LOGIN_HANDLER_ID     = 1000
+POST_RANK_HANDLER_ID = 1001
+
 class UserService(BaseService):
     def __init__(self, main, sid, db=None):
         BaseService.__init__(self, main, sid, db)
-        self.registCommand('1000', self.loginHandler)
-        self.registCommand('1001', self.postRankHandler)
+        self.registCommand(LOGIN_HANDLER_ID, self.loginHandler)
+        self.registCommand(POST_RANK_HANDLER_ID, self.postRankHandler)
 
     # 登录 cid=0
     def loginHandler(self, hid, data):
-        respData = {'sid': 1000,
-                    'cid': 1000}
+        respData = {'sid': self.sid,
+                    'cid': LOGIN_HANDLER_ID}
         if not 'account' in data:
             logging.debug('login data has not account key')
             return
@@ -49,8 +53,8 @@ class UserService(BaseService):
 
     # 排行榜 cid=1
     def postRankHandler(self, hid, data=''):
-        respData = {'sid': 1000,
-                    'cid': 1001,
+        respData = {'sid': self.sid,
+                    'cid': POST_RANK_HANDLER_ID,
                     'users': self.main.users}
         respJson = json.dumps(respData)
         self.main.host.send(hid, respJson)
