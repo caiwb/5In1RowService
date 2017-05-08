@@ -19,7 +19,7 @@ class ServiceDispather(object):
             data = json.loads(data)
         except:
             logging.warning('msg format error')
-        if not data.has_key('sid'):
+        if not 'sid' in data:
             logging.warning('data has not sid key')
             return -1
         sid = data['sid']

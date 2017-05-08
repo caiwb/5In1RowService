@@ -15,7 +15,7 @@ class BaseService(object):
         self.commandMap[cid] = function
 
     def handle(self, hid, data):
-        if not data.has_key('cid'):
+        if 'cid' not in data:
             return
         cid = data['cid']
         if isinstance(cid, int):

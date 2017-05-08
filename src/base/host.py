@@ -45,7 +45,7 @@ class MainService(object):
             msg = self.host.read()
             event, hid, tag, data = msg
             t = time.time()
-            if event != -1 and self.clientLastMsgMap.has_key(str(hid)) \
+            if event != -1 and str(hid) in self.clientLastMsgMap \
                     and msg == self.clientLastMsgMap[str(hid)][0] \
                     and t - self.clientLastMsgMap[str(hid)][1] < 1:
 
@@ -59,7 +59,7 @@ class MainService(object):
                     for idx, uid in enumerate(self.userHid.keys()):
                         if hid == self.userHid[uid]:
                             user = self.findUserByUid(uid)
-                            if user.has_key('rid') and user['rid']:
+                            if 'rid' in user and user['rid']:
                                 self.host.queue.append((netstream.NET_DATA, hid, 0,
                                                         '{"rid": %d, "cid": 1003, '
                                                         '"uid": %s, "sid": 1001}'

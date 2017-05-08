@@ -16,7 +16,7 @@ class RoomService(BaseService):
     def createRoomHandler(self, hid, data):
         respData = {'sid': 1001,
                     'cid': 1000}
-        if not data.has_key('uid'):
+        if 'uid' not in data:
             logging.warning('create room data has not uid key')
             return
 
@@ -65,7 +65,7 @@ class RoomService(BaseService):
     def enterRoomHandler(self, hid, data):
         respData = {'sid': 1001,
                     'cid': 1002}
-        if not data.has_key('uid') or not data.has_key('rid'):
+        if 'uid' not in data or 'rid' not in data:
             logging.warning('enter room data key err')
             return
 
@@ -100,7 +100,7 @@ class RoomService(BaseService):
     def leaveRoomHandler(self, hid, data):
         respData = {'sid': 1001,
                     'cid': 1003}
-        if not data.has_key('uid') or not data.has_key('rid'):
+        if 'uid' not in data or 'rid' not in data:
             logging.warning('leave room data key err')
             return
 
@@ -114,7 +114,7 @@ class RoomService(BaseService):
         result = 1
         try:
             for user in room['users']:
-                if self.main.userHid.has_key(user['uid']):
+                if user['uid'] in self.main.userHid:
                     hids.append(self.main.userHid[user['uid']])
                 if user['uid'] == uid:
                     room['users'].remove(user)
@@ -145,13 +145,14 @@ class RoomService(BaseService):
     def chatHandler(self, hid, data):
         respData = {'sid': 1001,
                     'cid': 1004}
-        if not data.has_key('uid') or not data.has_key('rid') \
-                or not data.has_key('text'):
+        if 'uid' not in data or 'rid' not in data \
+                or 'text' not in data:
             logging.warning('chat data key err')
+            return
         respData.update(data)
         respJson = json.dumps(respData)
         room = self.main.findRoomByRid(data['rid'])
         for user in room['users']:
-            if self.main.userHid.has_key(user['uid']):
+            if user['uid'] in self.main.userHid:
                 self.main.host.send(self.main.userHid[user['uid']], respJson)
         logging.debug('send s=1001 c=1004 ' + respJson)

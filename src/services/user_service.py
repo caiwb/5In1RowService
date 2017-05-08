@@ -14,7 +14,7 @@ class UserService(BaseService):
     def loginHandler(self, hid, data):
         respData = {'sid': 1000,
                     'cid': 1000}
-        if not data.has_key('account'):
+        if not 'account' in data:
             logging.debug('login data has not account key')
             return
         account = data['account']

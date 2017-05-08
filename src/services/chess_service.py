@@ -1,8 +1,7 @@
 #-*- encoding: UTF-8 -*-
 
 from src.base.base_service import BaseService
-import logging, json, copy
-from room_object import RoomObject
+import logging, json
 
 #confirm type
 CONFIRM_START   = 0
@@ -29,9 +28,9 @@ class ChessService(BaseService):
     def confirmHandler(self, hid, data):
         respData = {'sid': 1002,
                     'cid': 1000}
-        if not data.has_key('rid') or not data.has_key('uid') \
-                or not data.has_key('type') \
-                or not data.has_key('side'):
+        if 'rid' not in data or 'uid' not in data \
+                or 'type' not in data \
+                or 'side' not in data:
             logging.debug('chess data has error key')
             return
         room = self.main.findRoomByRid(data['rid'])
@@ -64,11 +63,11 @@ class ChessService(BaseService):
 
             if confirmType == CONFIRM_START:
                 self.start(str(room['rid']))
-            elif confirmType == CONFIRM_REDO and data.has_key('chess_type'):
+            elif confirmType == CONFIRM_REDO and 'chess_type' in data:
                 redoStep = self.redo(str(room['rid']), data['chess_type'])
                 respData['step'] = redoStep
                 respData['chess_type'] = data['chess_type']
-            elif confirmType == CONFIRM_GIVE_UP and data.has_key('chess_type'):
+            elif confirmType == CONFIRM_GIVE_UP and 'chess_type' in data:
                 self.giveup(str(room['rid']), 3 - data['chess_type'])
                 return
             elif confirmType == CONFIRM_NO:
@@ -86,8 +85,8 @@ class ChessService(BaseService):
     def chessHandler(self, hid, data):
         respData = {'sid': 1002,
                     'cid': 1001}
-        if not data.has_key('x') and not data.has_key('y') and\
-                not data.has_key('type'):
+        if 'x' not in data and 'y' not in data and \
+                'type' not in data:
             logging.debug('chess data has error key')
             return
 
