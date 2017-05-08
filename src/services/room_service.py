@@ -152,7 +152,7 @@ class RoomService(BaseService):
                     'cid': CHAT_IN_ROOM_HANDLER_ID}
         if 'uid' not in data or 'rid' not in data \
                 or 'text' not in data:
-            logging.warning('chat data key err')
+            logging.warning('room chat data key err')
             return
         respData.update(data)
         respJson = json.dumps(respData)

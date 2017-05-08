@@ -165,7 +165,7 @@ class ChessService(BaseService):
             if chessboard[i][j - loop] != type:
                 break
             count += 1
-        if count == 10:
+        if count == 5:
             return True
         j = y
         for loop in range(1, 6):
