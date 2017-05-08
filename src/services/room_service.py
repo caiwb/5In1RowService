@@ -1,10 +1,10 @@
 #-*- encoding: UTF-8 -*-
 
-from base_service import BaseService
+from src.base.base_service import BaseService
 import logging, json
 
 class RoomService(BaseService):
-    def __init__(self, main, sid, db):
+    def __init__(self, main, sid, db=None):
         BaseService.__init__(self, main, sid, db)
         self.registCommand('1000', self.createRoomHandler)
         self.registCommand('1001', self.postListHandler)

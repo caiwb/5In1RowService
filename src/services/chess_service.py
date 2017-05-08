@@ -1,6 +1,6 @@
 #-*- encoding: UTF-8 -*-
 
-from base_service import BaseService
+from src.base.base_service import BaseService
 import logging, json, copy
 from room_object import RoomObject
 
@@ -20,7 +20,7 @@ WHITE_CHESS = 1
 BLACK_CHESS = 2
 
 class ChessService(BaseService):
-    def __init__(self, main, sid, db):
+    def __init__(self, main, sid, db=None):
         BaseService.__init__(self, main, sid, db)
         self.registCommand('1000', self.confirmHandler)
         self.registCommand('1001', self.chessHandler)
