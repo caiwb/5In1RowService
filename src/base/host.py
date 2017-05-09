@@ -27,6 +27,7 @@ class MainService(object):
         self.userHid = {}
         self.chessMap = {}
         self.chessDataMap = {}
+        self.forbiddenMap = {}
         self.lastBlack = None
         self.lastWhite = None
         self.__startLoop()
@@ -73,12 +74,15 @@ class MainService(object):
                             continue
 
                 elif event == netstream.NET_DATA:
+                    if data == 'hb':
+                        continue
                     self.__handleData(hid, data)
 
                 elif event == netstream.NET_TIMER:
                     for client in self.host.clients:
                         if client:
                             self.host.send(client.hid, 'hb')
+                    logging.debug('send heart beat')
 
     def postAllRank(self):
         for client in self.host.clients:
